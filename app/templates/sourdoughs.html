@@ -1,0 +1,48 @@
+{%  extends "base.html" %}
+
+{% block content %}
+<div class="container vertical-center">
+    {{ table }}
+</div>
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Create new sourdough!</h3>
+
+                <div class="card-body">
+                        <form action="" method="POST" novalidate >
+                            {{ form.hidden_tag() }}
+                            <div class="input-group form-group">
+                                {{ form.sourdough_name.label(class_="form-control") }}
+                                {{ form.sourdough_name(class="form-control", placeholder="e.g. Ma-Rye-Ah Carey")}}
+
+                                {% for error in form.sourdough_name.errors %}
+                                    <span style="color: red;"> [{{ error }}] </span>
+                                {% endfor %}
+                            </div>
+                            <div class="input-group form-group">
+                                {{ form.birthday.label(class_="form-control") }}
+                                {{ form.birthday(class="form-control")}}
+                            </div>
+
+
+
+
+                            <br>
+                            <div class="form-group">
+                            {{ form.create(class="btn float-right") }}
+                            </div>
+                        </form>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

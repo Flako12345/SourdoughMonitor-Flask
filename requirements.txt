@@ -1,0 +1,8 @@
+flask
+flask_restful
+flask_jwt
+flask_SQLAlchemy
+flask_wtf
+flask_login
+flask_migrate
+flask_table

@@ -1,0 +1,45 @@
+{%  extends "base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/custom.css">
+
+    <title>Login</title>
+</head>
+<body>
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center h-100">
+        <div class="card-container">
+            {% for dough in sourdoughs %}
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ dough.name }} </h4>
+                    <form action="{{ url_for('.feed', id=dough.id) }}" method="POST" novalidate>
+                        {{ dough.form.hidden_tag() }}
+
+                        <p>Last fed: {{ dough.lastFed }}</p>
+
+                    {{ dough.form.submit() }}
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="container">
+    {{ feedTable }}
+</div>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+h1{
+    color:brown;
+}
+body{
+    background: url("../img/login-background.jpg");
+    background-height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar-right
+{
+    float: right;
+}
+
+.card-container
+{
+    display: grid;
+    height: auto;
+    width: 100%;
+    justify-content: space-around;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 1rem;
+    padding: 1rem;
+    }
+.card
+{
+    height: auto;
+    width: auto
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: rgba(0,55,55,0.50) !important;
+    }
+
+.card-login
+{
+    height: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0,55,55,0.50) !important;
+}
+
+.card p
+{
+color: black;
+}
+
+.card-header h1, h2, h3, h4, p
+{
+    color: black;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: rgb(255, 191, 0);
+color: black;
+border:0 !important;
+}
+
+.btn{
+    color: black;
+    background-color: rgb(255, 191, 0);
+    width: 100px;
+}
+
+.card-footer p{
+    color: white;
+    align: center;
+    height: auto;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
