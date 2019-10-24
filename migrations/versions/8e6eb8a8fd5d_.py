@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ea331bfe9e9d
+Revision ID: 8e6eb8a8fd5d
 Revises: 
-Create Date: 2019-08-05 21:32:17.149291
+Create Date: 2019-10-24 14:30:32.217892
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ea331bfe9e9d'
+revision = '8e6eb8a8fd5d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,7 +32,7 @@ def upgrade():
     sa.Column('name', sa.String(length=30), nullable=True),
     sa.Column('birthday', sa.DateTime(), nullable=True),
     sa.Column('alive', sa.Boolean(), nullable=True),
-    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -40,7 +40,7 @@ def upgrade():
     op.create_table('feeding',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
-    sa.Column('sourdough_id', sa.Integer(), nullable=True),
+    sa.Column('sourdough_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['sourdough_id'], ['sourdough.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -48,8 +48,11 @@ def upgrade():
     op.create_table('reading',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
-    sa.Column('reading', sa.Integer(), nullable=True),
+    sa.Column('reading', sa.Integer(), nullable=False),
+    sa.Column('normalizedReading', sa.Numeric(), nullable=True),
+    sa.Column('feeding_id', sa.Integer(), nullable=True),
     sa.Column('sourdough_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['feeding_id'], ['feeding.id'], ),
     sa.ForeignKeyConstraint(['sourdough_id'], ['sourdough.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

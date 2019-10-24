@@ -41,6 +41,7 @@ class Feeding(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     sourdough_id = db.Column(db.Integer, db.ForeignKey('sourdough.id'), nullable=False)
+    readings = db.relationship('Reading', backref='feeding', lazy='dynamic')
 
     def __repr__(self):
         return 'Fed {} at {}'.format(self.sourdough.name, self.timestamp)
@@ -50,13 +51,17 @@ class Reading(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     reading = db.Column(db.Integer, nullable=False)
+    normalizedReading = db.Column(db.Numeric, nullable=True)
+    feeding_id = db.Column(db.Integer, db.ForeignKey('feeding.id'))
     sourdough_id = db.Column(db.Integer, db.ForeignKey('sourdough.id'))
+    filename = db.Column(db.String(100))
 
     @staticmethod
     def from_json(json_reading):
         reading = json_reading.get('reading')
         sourdough_Id = json_reading.get('sourdough_id')
-        return Reading(reading=reading, sourdough_id=sourdough_Id)
+        filename = json_reading.get('filename')
+        return Reading(reading=reading, sourdough_id=sourdough_Id, filename=filename)
 
 
 

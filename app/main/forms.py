@@ -51,4 +51,7 @@ class ReadingTable(Table):
     id = Col('Reading ID')
     timestamp = Col('Reading Time')
     reading = Col('Reading')
+    normalizedReading = Col('Normalized Reading')
+    feeding = Col('Feeding')
+    filename = Col('File')
     sourdoughName = Col('Sourdough', attr_list=['sourdough', 'name'])
