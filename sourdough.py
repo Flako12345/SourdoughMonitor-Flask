@@ -15,6 +15,8 @@ def make_shell_context():
     return {'db': db, 'User': User}
 
 
+#User.insert_test_user()
+
 
 
 

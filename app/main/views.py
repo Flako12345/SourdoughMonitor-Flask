@@ -47,9 +47,14 @@ def sourdoughs():
 @main.route("/feedings", methods=['GET'])
 @login_required
 def feedings():
-    sourdoughs = Sourdough.query.all()
+    #sourdoughs = Sourdough.query.all()
+    sourdoughs = current_user.sourdoughs
 
-    feedings = Feeding.query.all()
+    #feedings = [sourdough.feedings for sourdough in sourdoughs]
+    sourdoughIds = [sourdough.id for sourdough in sourdoughs]
+    feedings = Feeding.query.filter(Feeding.sourdough_id.in_(sourdoughIds)).all()
+
+
     for dough in sourdoughs:
        dough.form = forms.FeedForm()
        dough.lastFed = dough.feedings.order_by(Feeding.timestamp.desc()).first()

@@ -26,6 +26,14 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    @staticmethod
+    def insert_test_user():
+        test_user = User(email='Test')
+        test_user.set_password('password')
+        db.session.add(test_user)
+        db.session.commit()
+
+
 
 class Sourdough(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,11 +1,13 @@
 from flask import request, jsonify
 from . import api
+from .authentication import auth
 from ..models import Reading, Feeding
 from .. import db
 from datetime import datetime
 
 
 @api.route('/readings/', methods = ['POST'])
+@auth.login_required
 def new_reading():
     reading = Reading.from_json(request.json)
     """
