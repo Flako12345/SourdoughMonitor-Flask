@@ -1,5 +1,5 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 from app import db, login_manager
 from datetime import datetime
 
@@ -26,12 +26,28 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def get_readings(self):
+        sourdoughs = current_user.sourdoughs
+        sourdoughIds = [sourdough.id for sourdough in sourdoughs]
+        readings = Reading.query.filter(Reading.sourdough_id.in_(sourdoughIds)).all()
+
+        return readings
+
+    def get_feedings(self):
+        sourdoughs = current_user.sourdoughs
+        sourdoughIds = [sourdough.id for sourdough in sourdoughs]
+        feedings = Feeding.query.filter(Feeding.sourdough_id.in_(sourdoughIds)).all()
+
+        return feedings
+
     @staticmethod
     def insert_test_user():
         test_user = User(email='Test')
         test_user.set_password('password')
         db.session.add(test_user)
         db.session.commit()
+
+
 
 
 

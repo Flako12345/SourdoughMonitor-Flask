@@ -47,13 +47,9 @@ def sourdoughs():
 @main.route("/feedings", methods=['GET'])
 @login_required
 def feedings():
-    #sourdoughs = Sourdough.query.all()
+
     sourdoughs = current_user.sourdoughs
-
-    #feedings = [sourdough.feedings for sourdough in sourdoughs]
-    sourdoughIds = [sourdough.id for sourdough in sourdoughs]
-    feedings = Feeding.query.filter(Feeding.sourdough_id.in_(sourdoughIds)).all()
-
+    feedings = current_user.get_feedings()
 
     for dough in sourdoughs:
        dough.form = forms.FeedForm()
@@ -87,10 +83,23 @@ def feed(id):
 @main.route("/readings")
 @login_required
 def readings():
+
+    readings = current_user.get_readings()
+    readingTable = forms.ReadingTable(readings, no_items="No readings registered", classes=['table', 'table-dark'])
+
+    return render_template('readings.html', readingTable=readingTable)
+
+
+"""
+Old version of readings:
+@main.route("/readings")
+@login_required
+def readings():
     readings = Reading.query.all()
     readingTable = forms.ReadingTable(readings, no_items="No readings registered", classes=['table', 'table-dark'])
 
     return render_template('readings.html', readingTable=readingTable)
+"""
 
 
 """
