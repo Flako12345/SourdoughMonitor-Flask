@@ -2,10 +2,12 @@ import os
 from app import create_app, config, db
 from app.models import User
 from flask_migrate import Migrate
-import os
-from config import config
+from flask_migrate import upgrade
+import config
+import click
 
-app = create_app(config_name='development')
+appconfig = os.getenv('CONFIG') or 'development'
+app = create_app(config_name='config.ProductionConfig')
 migrate = Migrate(app, db)
 
 app.run(debug=True)
@@ -14,8 +16,13 @@ app.run(debug=True)
 def make_shell_context():
     return {'db': db, 'User': User}
 
+@app.cli.command()
+def deploy():
+    # Migrate database
+    upgrade()
+    # Insert test user
+    User.insert_test_user()
 
-#User.insert_test_user()
 
 
 

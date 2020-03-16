@@ -17,10 +17,12 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 class ProductionConfig(Config):
-    pass
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or 'mysql://sourdoughadmin@sourdoughmonitor01:ClintYeastwood2019@sourdoughmonitor01.mysql.database.azure.com/sourdoughmonitor01'
+    DEBUG = False
 
 class TestConfig(Config):
     pass
 
 
-config = {'development': DevelopmentConfig}
+config = {'development': DevelopmentConfig,
+          'production': ProductionConfig}
