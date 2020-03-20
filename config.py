@@ -2,9 +2,9 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-## See configuration options in Flask by Miguel Grinberg
+
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY') or 'SomeSecret'
+    SECRET_KEY = os.getenv('SECRET_KEY' 'SomeSecret')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
