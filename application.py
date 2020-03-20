@@ -7,7 +7,7 @@ import config
 import click
 
 appconfig = os.getenv('CONFIG') or 'config.DevelopmentConfig'
-app = create_app(config_name=appconfig)
+app = create_app(config_name='config.DevelopmentConfig')
 migrate = Migrate(app, db)
 
 app.run(debug=True)
