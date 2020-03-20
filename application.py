@@ -6,7 +6,7 @@ from flask_migrate import upgrade
 import config
 import click
 
-appconfig = os.getenv('CONFIG')# or 'config.DevelopmentConfig'
+appconfig = os.getenv('CONFIG', 'config.DevelopmentConfig')# or 'config.DevelopmentConfig'
 app = create_app(config_name=appconfig)
 migrate = Migrate(app, db)
 
