@@ -8,6 +8,7 @@ import click
 
 appconfig = os.getenv('CONFIG', 'config.ProductionConfig')# or 'config.DevelopmentConfig'
 app = create_app(config_name=appconfig)
+app.secret_key = os.getenv('SECRET_KEY', 'VerySecret')
 migrate = Migrate(app, db)
 
 app.run(debug=True)
