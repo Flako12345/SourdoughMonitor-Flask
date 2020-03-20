@@ -4,7 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 ## See configuration options in Flask by Miguel Grinberg
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'SomeSecret'
+    SECRET_KEY = os.getenv('SECRET_KEY') or 'SomeSecret'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
@@ -17,7 +17,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI') or 'mysql://sourdoughadmin@sourdoughmonitor01:ClintYeastwood2019@sourdoughmonitor01.mysql.database.azure.com/sourdoughmonitor01'
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
     DEBUG = False
 
 class TestConfig(Config):
