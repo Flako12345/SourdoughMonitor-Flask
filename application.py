@@ -7,7 +7,7 @@ import config
 import click
 
 appconfig = os.getenv('CONFIG', 'config.ProductionConfig')# or 'config.DevelopmentConfig'
-app = create_app(config_name=appconfig)
+app = create_app(config_name='config.ProductionConfig')
 app.secret_key = os.getenv('SECRET_KEY', 'VerySecret')
 app.config['SESSION_TYPE'] = 'filesystem'
 migrate = Migrate(app, db)
