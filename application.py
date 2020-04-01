@@ -12,7 +12,7 @@ app.secret_key = os.getenv('SECRET_KEY', 'VerySecret')
 #app.config['SESSION_TYPE'] = 'filesystem'
 migrate = Migrate(app, db)
 
-app.run(debug=True, port=8000, host='0.0.0.0')
+app.run(debug=True, port=8000)
 
 @app.shell_context_processor
 def make_shell_context():
