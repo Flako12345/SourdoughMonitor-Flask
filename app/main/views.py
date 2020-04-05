@@ -48,7 +48,7 @@ def sourdoughs():
 @login_required
 def feedings():
 
-    sourdoughs = current_user.sourdoughs
+    sourdoughs = current_user.sourdoughs.all()
     feedings = current_user.get_feedings()
 
     for dough in sourdoughs:
